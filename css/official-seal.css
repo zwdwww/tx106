@@ -1,0 +1,691 @@
+/*
+ * 律师专用电子签章系统 - 样式文件
+ * 版权所有 © 2024 赵卫东
+ * 联系方式：13319557755 | 8777817@qq.com
+ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+*:focus,button:focus,input:focus,select:focus,textarea:focus{outline:none!important;box-shadow:none!important}
+
+:root{--font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;--primary-color:#1890ff;--success-color:#52c41a;--warning-color:#faad14;--error-color:#ff4d4f;--text-color:#333;--text-color-secondary:#666;--border-color:#e0e0e0;--background-color:#f5f7fa;--card-background:#fff;--form-background:#f8f9fb;--preview-background:#fafbfc;--shadow:0 2px 8px rgba(0,0,0,.08);--border-radius:8px;--transition:all .2s ease}
+body{padding:10px;min-height:100vh;font-family:var(--font-family);background:var(--background-color);color:var(--text-color);line-height:1.4;user-select:none;display:flex;justify-content:center;align-items:flex-start;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+.container{width:100%;max-width:375px;background:var(--card-background);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition);animation:fadeIn .3s ease}
+.container:hover{box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.seal-generator{display:flex;flex-direction:column;width:100%}
+.header{padding:14px 20px 10px;background:var(--card-background)}
+.title{margin:0;font-size:19px;font-weight:600;color:var(--primary-color);text-align:center;letter-spacing:.5px}
+.tabs{display:flex;padding:0 20px;border-bottom:1px solid #e8eaed;background:#fff}
+.tab-item{flex:1;padding:10px 8px;border:none;background:transparent;font-size:15px;font-weight:500;color:#666;cursor:pointer;position:relative;transition:all .3s ease}
+.tab-item:hover{color:#1890ff}
+.tab-active{color:#1890ff;font-weight:600}
+.tab-active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:32px;height:3px;background:linear-gradient(90deg,#1890ff,#40a9ff);border-radius:2px 2px 0 0;box-shadow:0 2px 4px rgba(24,144,255,.3)}
+
+/* 印章预览区 */
+.seal-preview {
+  position: relative;
+  width: 100%;
+  height: 265px;
+  background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+  border-top: 1px solid #e8eaed;
+  border-bottom: 1px solid #e8eaed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  /* 性能优化 */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+#sealCanvas {
+  display: block;
+  width: 255px;
+  height: 255px;
+  max-width: 100%;
+  max-height: 100%;
+  /* 性能优化 */
+  will-change: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* 表单区域 */
+.form-section {
+  padding: 12px 13px 12px 13px;
+  background: var(--form-background);
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 14px;
+}
+
+.form-item:last-child {
+  margin-bottom: 10px;
+}
+
+.form-item label {
+  width: 48px;
+  font-size: 15px;
+  color: #333333;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.form-item input {
+  flex: 1;
+  height: 33px;
+  padding: 0 1px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--card-background);
+}
+
+/* 单位输入框样式 */
+.form-item input[id="companyName"] {
+  flex: 1;
+  margin-left: -23px;
+  width: calc(100% + 23px);
+}
+
+/* 姓名输入框固定宽度为六个字 */
+.form-item input[id="personalName"] {
+  flex: none;
+  width: 140px;
+  /* 六个字的固定宽度 */
+}
+
+/* 手机输入框固定宽度为11个数字 */
+.form-item input[id="phoneNumber"] {
+  flex: none;
+  width: 112px;
+  /* 11个数字的固定宽度（缩小到80%） */
+  margin-left: -23px;
+}
+
+.form-item input:focus {
+  border-color: var(--primary-color);
+}
+
+.form-item input:hover:not(:focus) {
+  border-color: #40a9ff;
+}
+
+/* 一行显示的表单项 */
+.form-item-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-input-group {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.form-input-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+}
+
+.form-input-item label {
+  width: 44px;
+  font-size: 15px;
+  color: #333333;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.form-input-item input {
+  flex: 1;
+  height: 33px;
+  padding: 0 1px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--card-background);
+}
+
+/* 姓名输入框固定宽度为四个字 */
+.form-input-item input[id="personalNameRow"] {
+  flex: none;
+  width: 88px;
+  /* 四个字的固定宽度 */
+  margin-left: -16px;
+}
+
+/* 手机输入框固定宽度为12个数字 */
+.form-input-item input[id="phoneNumberRow"] {
+  flex: none;
+  width: 112px;
+  /* 12个数字的固定宽度（缩小到80%） */
+  margin-left: -14px;
+}
+
+/* 包含手机输入框的容器整体向左移动 */
+.form-input-item:has(input[id="phoneNumberRow"]) {
+  margin-left: -60px;
+}
+
+.form-input-item input:focus {
+  border-color: var(--primary-color);
+}
+
+/* 操作按钮（一排显示） */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  padding: 0 13px 12px 53px;
+  background: var(--form-background);
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid #b3d9ff;
+  margin-top: -14px;
+}
+
+/* 手写签名的按钮区域特殊处理 */
+#signatureActions {
+  margin-top: 20px;
+}
+
+.btn {
+  height: 33px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0 12px;
+  position: relative;
+  overflow: hidden;
+  /* 性能优化 */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* 按钮宽度根据字数调整 */
+.btn-refresh {
+  flex: 0 0 auto;
+  min-width: 50px;
+  letter-spacing: 18px;
+  text-indent: 18px;
+}
+
+.btn-preview {
+  flex: 0 0 auto;
+  min-width: 72px;
+  letter-spacing: 18px;
+  text-indent: 18px;
+}
+
+.btn-download {
+  flex: 0 0 auto;
+  min-width: 90px;
+  padding: 0 1px;
+}
+
+.btn-outline {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  color: #333333;
+}
+
+.btn-outline:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.btn-outline:active {
+  background: #f5f5f5;
+}
+
+.btn-primary {
+  background: #1677ff;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #4096ff;
+}
+
+.btn-primary:active {
+  background: #0958d9;
+}
+
+/* 价格信息（内联显示） */
+.price-inline {
+  font-size: 18px;
+  font-weight: normal;
+  color: #ff4d4f;
+  margin-left: -5px;
+  white-space: nowrap;
+  padding: 0 8px;
+  position: relative;
+}
+
+/* 价格链接样式 */
+.price-link {
+  text-decoration: none;
+  color: #1890ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.price-link:hover {
+  color: #40a9ff;
+  background: #e6f7ff;
+  transform: translateY(-1px);
+}
+
+.price-link:active {
+  transform: translateY(0);
+}
+
+/* 说明文字区域 */
+.description {
+  padding: 0 16px 14px 16px;
+  background: var(--form-background);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #666666;
+}
+
+.desc-title {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.desc-text {
+  margin: 0 0 4px 0;
+}
+
+.desc-link {
+  margin: 3px 0;
+}
+
+.desc-link a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.desc-link a:hover {
+  text-decoration: underline;
+}
+
+.desc-footer {
+  margin: 8px 0 0 0;
+  font-size: 11px;
+  color: #999999;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 8px;
+}
+
+.desc-copyright {
+  margin: 4px 0 0 0;
+  font-size: 10px;
+  color: #d32f2f;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* 下载计数器样式 */
+#downloadCounter {
+  color: #1890ff;
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* 下载计数器文字样式 */
+.download-counter-text {
+  font-weight: normal;
+  color: #1890ff;
+}
+
+/* 微信下载提示样式 */
+.wechat-download-tip {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 9999;
+  text-align: center;
+  font-size: 16px;
+  max-width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.wechat-download-tip .tip-content p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.wechat-download-tip .tip-content p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  color: #52c41a;
+}
+
+/* 支付收银台 */
+.pay-modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.pay-modal-mask.hidden {
+  display: none;
+}
+
+.pay-modal {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  padding: 14px;
+}
+
+.pay-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pay-modal-header h4 {
+  font-size: 16px;
+  color: #222;
+}
+
+.pay-close {
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #777;
+}
+
+.pay-amount {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.pay-amount strong {
+  color: #ff4d4f;
+}
+
+.pay-channel-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pay-channel-item {
+  flex: 1;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  height: 34px;
+  cursor: pointer;
+}
+
+.pay-channel-item.active {
+  border-color: #1890ff;
+  color: #1890ff;
+  background: #f0f7ff;
+}
+
+.pay-content {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+}
+
+.pay-qr-block,
+.pay-mobile-block {
+  text-align: center;
+}
+
+.pay-qr-block.hidden,
+.pay-mobile-block.hidden {
+  display: none;
+}
+
+#payQrImage {
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.pay-mobile-tip {
+  margin-bottom: 10px;
+}
+
+.pay-go-btn {
+  width: 100%;
+}
+
+.pay-status-text {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  min-height: 18px;
+}
+
+.desc-tips {
+  background: #f6f8fa;
+  border-left: 4px solid var(--primary-color);
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+.desc-tips h4 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  color: var(--primary-color);
+}
+
+.desc-tips p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: var(--text-color-secondary);
+}
+
+/* 加载状态 */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 错误提示 */
+.error-message {
+  color: var(--error-color);
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.form-item.error input {
+  border-color: var(--error-color);
+}
+
+.form-item.error .error-message {
+  display: block;
+}
+
+/* 成功提示 */
+.success-message {
+  background: var(--success-color);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 手写签名画布区域 */
+.signature-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 204px;
+  background: var(--preview-background);
+  border: 2px solid #ff4d4f;
+  margin: 0;
+}
+
+.signature-canvas-wrapper canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* 防止图片和画布被复制 */
+canvas,
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+}
+
+/* 手写签名画布需要可交互 */
+.signature-canvas-wrapper canvas {
+  pointer-events: auto;
+}
+
+
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeIn 0.3s ease;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 选中文本样式 */
+::selection {
+  background: rgba(24, 144, 255, 0.2);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(24, 144, 255, 0.2);
+  color: inherit;
+}

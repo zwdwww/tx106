@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="./">
+  <title>115电子公章、电子私章、手写签名</title>
+  <meta name="description" content="查链 115.cn、">
+  <meta name="keywords" content="电子签章,电子公章,电子私章,电子签名,在线印章制作">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#1890ff">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="赵卫东">
+  <meta property="og:title" content="115电子签章">
+  <meta property="og:description" content="115电子公章、电子私章和手写签名">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="http://55115.cn/">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="css/official-seal.css">
+</head>
+<body>
+  <main class="container">
+    <div class="seal-generator">
+      <nav class="tabs" role="tablist" aria-label="印章类型">
+        <button class="tab-item tab-active" role="tab" aria-selected="true" onclick="switchTab('official', event)" aria-controls="sealPreview">115电子公章</button>
+        <button class="tab-item" role="tab" aria-selected="false" onclick="switchTab('private', event)" aria-controls="sealPreview">电子私章</button>
+        <button class="tab-item" role="tab" aria-selected="false" onclick="switchTab('signature', event)" aria-controls="signatureCanvasWrapper">手写签名</button>
+      </nav>
+
+      <section class="seal-preview" id="sealPreview" role="tabpanel" aria-labelledby="sealPreview">
+        <canvas id="sealCanvas" width="255" height="255" aria-label="印章预览区域"></canvas>
+      </section>
+
+      <section class="signature-canvas-wrapper" id="signatureCanvasWrapper" style="display:none" role="tabpanel" aria-label="手写签名区域">
+        <canvas id="signatureCanvas" aria-label="手写签名画布"></canvas>
+      </section>
+
+      <form class="form-section" id="formSection" aria-label="印章配置表单">
+        <div class="form-item form-item-company">
+          <label for="companyName">示例</label>
+          <input type="text" id="companyName" name="companyName" value="联合在线法务有限公司" maxlength="18" autocomplete="organization" aria-required="true">
+        </div>
+        <div class="form-item form-item-row" style="display:none">
+          <div class="form-input-group">
+            <div class="form-input-item">
+              <label for="personalNameRow">姓名</label>
+              <input type="text" id="personalNameRow" name="personalNameRow" value="武松印章" maxlength="4" autocomplete="name" aria-required="true">
+            </div>
+            <div class="form-input-item">
+              <label>手机</label>
+              <input type="tel" id="phoneNumberRow" value="13319557755" maxlength="11">
+            </div>
+          </div>
+        </div>
+        <div class="form-item">
+          <label>手机</label>
+          <input type="tel" id="phoneNumber" value="13319557755" maxlength="11">
+        </div>
+      </form>
+
+      <div class="action-buttons" id="sealActions">
+        <button class="btn btn-outline btn-refresh" onclick="refreshSeal()">刷新</button>
+        <button class="btn btn-primary btn-download" onclick="downloadSeal()">下载透明章</button>
+        <span class="price-inline">每次1元</span>
+      </div>
+
+      <div class="action-buttons" id="signatureActions" style="display:none" role="toolbar" aria-label="签名操作按钮">
+        <button class="btn btn-outline btn-refresh" type="button" onclick="clearSignature()" aria-label="清空签名">刷新</button>
+        <button class="btn btn-primary btn-download" type="button" onclick="downloadSignature()" aria-label="下载签名">下载透明章</button>
+        <span class="price-inline" aria-label="每次收费一元">每次1元</span>
+      </div>
+
+      <div class="description">
+        <h3 class="desc-title">使用说明：<span class="download-counter-text">（下载<span id="downloadCounter">23333</span>次）</span></h3>
+        <p class="desc-text">本电子章时间戳及手机号具有唯一性、可在授权范围内使用。方法：下载、复制黏贴到word文档、鼠标右键"文字环绕""衬于文字下方"、转PDF即可</p>
+        <p class="desc-link">
+          网址：<a href="http://55115.cn" target="_blank" rel="noopener">55115.cn</a>
+          示例：<a href="http://55.115.cn" target="_blank" rel="noopener">55.115.cn</a>
+          法务：<a href="http://007.115.cn" target="_blank" rel="noopener">007.115.cn</a>
+        </p>
+        <!-- <p class="desc-copyright">版权作品、请勿模仿！</p> -->
+        <!-- <p class="desc-footer">版权所有 © 2024 赵卫东 | 手机：13319557755 | 邮箱：8777817@qq.com</p> -->
+      </div>
+    </div>
+  </main>
+
+  <div id="paymentCheckoutMount"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.1.2/dist/signature_pad.umd.min.js" defer></script>
+  <script src="js/runtime-config.js" defer></script>
+  <script src="js/payment-checkout.js" defer></script>
+  <script src="js/official-seal.js" defer></script>
+</body>
+</html>
